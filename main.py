@@ -13,6 +13,6 @@ def build_chain(provider: str = "openai"):
     return chain
 
 ##########################################################################
-analysis = RunnableParallel(sentiment=sentiment_chain, topic=topic_chain)
+# analysis = RunnableParallel(sentiment=sentiment_chain, topic=topic_chain)
 # Hacelo con runeable a ver que onda
 ##########################################################################
