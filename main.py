@@ -1,31 +1,21 @@
 from schemas import EntidadesTecnicas
-from prompt_config import prompt
 from models import get_model
 from logging_config import logger
-import asyncio
+from chain import build_chain
+import asyncio  
 
 
 # Orquestación
-def build_chain(provider: str = "openai"):
-    model = get_model(provider)
-    structured_model = model.with_structured_output(EntidadesTecnicas)
-
-    chain = (prompt | structured_model).with_retry(
-        stop_after_attempt=3,
-        wait_exponential_jitter=True,
-    )
-    return chain
-
 async def process_text(text: str, provider: str = "openai") -> EntidadesTecnicas:
         chain = build_chain(provider)
-        logger.info(f"[{provider}] Procesando texto ({len(text)} caracteres)...")
+        logger.info(f"[{provider}] Procesando texto ({len(text)} caracteres)...\n")
 
         try:
             resultado = await chain.ainvoke({"texto": text})
-            logger.info(f"[{provider}] ✅ Extracción validada: {resultado.model_dump()}")
+            logger.info(f"[{provider}] ✅ Extracción validada: {resultado.model_dump()}\n")
             return resultado
         except Exception as e:
-            logger.error(f"[{provider}] ❌ Falló tras reintentos: {e}")
+            logger.error(f"[{provider}] ❌ Falló tras reintentos: {e}\n")
             raise
 
 
@@ -40,18 +30,18 @@ async def main():
     for provider in ["openai", "anthropic", "gemini"]:
         try:
             resultado = await process_text(texto_ejemplo, provider=provider)
-            print(f"\n--- {provider.upper()} ---")
+            print(f"\n--- {provider.upper()} ---\n")
             print(resultado.model_dump_json(indent=2))
         except Exception as e:
-            print(f"\n--- {provider.upper()} falló: {e} ---")
+            print(f"\n--- {provider.upper()} falló: {e} ---\n")
 
     for provider in ["openai", "anthropic", "gemini"]:
         try:
             resultado = await process_text(texto_ambiguo, provider=provider)
-            print(f"\n--- {provider.upper()} ---")
+            print(f"\n--- {provider.upper()} ---\n")
             print(resultado.model_dump_json(indent=2))
         except Exception as e:
-            print(f"\n--- {provider.upper()} falló: {e} ---")        
+            print(f"\n--- {provider.upper()} falló: {e} ---\n")        
 
 if __name__ == "__main__":
     asyncio.run(main())

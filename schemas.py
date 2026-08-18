@@ -21,7 +21,6 @@ class EntidadesTecnicas(BaseModel):
         ..., min_length=10,
         description="Resumen técnico de 1-2 oraciones sobre el contenido del texto"
     )
-# No falta un mensaje de error si algo de esto anterior no se cumple?
 
     @field_validator("tecnologias")
     @classmethod
