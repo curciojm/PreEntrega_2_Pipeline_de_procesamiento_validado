@@ -69,21 +69,9 @@ Para ejecutar el pipeline:
 python main.py
 ```
 
-El pipeline devuelve un objeto validado mediante Pydantic con la siguiente estructura:
-
-{
-  "tecnologias": [
-    "FastAPI",
-    "Redis",
-    "PostgreSQL"
-  ],
-  "nivel_de_criticidad": "alta",
-  "resumen_tecnico": "La API en FastAPI experimenta timeouts intermitentes debido a la saturación del caché en Redis y un pool de conexiones mal dimensionado a PostgreSQL."
-}
-
 ## Experimentación con concurrencia
 
-Se incluye main_concurrent.py que no fue solicitado en la tarea, como una experimentación adicional sobre el pipeline principal.
+Se incluye main_concurrent.py, que no fue solicitado en la tarea, como una experimentación adicional sobre el pipeline principal.
 
 Este script utiliza asyncio.gather() para ejecutar concurrentemente las cadenas correspondientes a OpenAI, Anthropic y Gemini sobre un mismo texto.
 
@@ -95,6 +83,7 @@ python main_concurrent.py
 
 ## Estructura del proyecto
 
+```
 ├── .env.example         # Ejemplo de variables de entorno
 ├── .gitignore
 ├── chain.py             # Construcción de la cadena LCEL y lógica de reintentos
@@ -106,7 +95,7 @@ python main_concurrent.py
 ├── README.MD
 ├── requirements.txt     # Dependencias del proyecto
 └── schemas.py           # Modelos y validaciones con Pydantic
-
+```
 
 ## Sobre el código
 
