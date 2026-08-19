@@ -1,5 +1,4 @@
 from schemas import EntidadesTecnicas
-from models import get_model
 from logging_config import logger
 from chain import build_chain
 import asyncio  
