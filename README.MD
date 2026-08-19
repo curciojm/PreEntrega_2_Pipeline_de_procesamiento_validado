@@ -71,9 +71,10 @@ python main.py
 
 ## Experimentación con concurrencia
 
-Se incluye main_concurrent.py, que no fue solicitado en la tarea, como una experimentación adicional sobre el pipeline principal.
+Se incluye `main_concurrent.py` como una experimentación adicional sobre el pipeline principal.
 
-Este script utiliza asyncio.gather() para ejecutar concurrentemente las cadenas correspondientes a OpenAI, Anthropic y Gemini sobre un mismo texto.
+Este script utiliza `asyncio.gather()` para ejecutar concurrentemente las cadenas correspondientes a OpenAI, Anthropic y Gemini sobre un mismo texto. Se utiliza `return_exceptions=True` para permitir que un error en un proveedor no interrumpa la ejecución de los demás
+
 
 Para ejecutarla:
 
@@ -92,7 +93,7 @@ python main_concurrent.py
 ├── main.py              # Punto de entrada principal y prueba del pipeline
 ├── models.py            # Configuración y selección de los modelos LLM
 ├── prompt_config.py     # ChatPromptTemplate utilizado por el pipeline
-├── README.MD
+├── README.md
 ├── requirements.txt     # Dependencias del proyecto
 └── schemas.py           # Modelos y validaciones con Pydantic
 ```
